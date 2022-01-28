@@ -7,6 +7,7 @@ Las tecnologias utilizadas son JavaScript y React para la aplicacion web, estila
 ## Components
 
 El sistema esta compuesto de los siguientes componentes:
+![Deployment Diagram - Development](models/Uml/Deployment%20Diagram%20-%20Development.jpg)
 
 ## Api
 ## Firestore Database
