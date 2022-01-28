@@ -4,7 +4,7 @@ El sistema permite crear, listar y unirse a diferentes eventos creados por otros
 
 Las tecnologias utilizadas son JavaScript y React para la aplicacion web, estilada con Boostrap v5.1.3 con la finalidad de hacer sensillo el diseño, En la api se utiliza Java con SpringBoot siguiendo una arquitectura cliente-servidor orientada a futuro implementar microservicios.
 
-# Components
+## Components
 
 El sistema esta compuesto de los siguientes componentes:
 
