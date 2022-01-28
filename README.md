@@ -10,8 +10,8 @@ El sistema esta compuesto de los siguientes componentes:
 
 ## Api
 ## Firestore Database
-# C4-model
+## C4-model
 ## System Diagram
 ## Container Diagram
 ## Component Diagram
-# Deployment
+## Deployment
