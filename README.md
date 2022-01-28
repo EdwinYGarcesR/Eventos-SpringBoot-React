@@ -1,2 +1,17 @@
-# Eventos-SpringBoot-React
-Aplicacion web para la gestion de eventos, la cual esta diseñada en Bootstrap 5 y Js, consumiendo una Api en Spring Boot con la finalidad de aplicar una arquitectura cliente-servidor y patrones de diseño.
+# Aplicacion de eventos, Api y App web
+
+El sistema permite crear, listar y unirse a diferentes eventos creados por otros usuarios, puedes hacer cosas como filtrar por diferentes categorias, comentar y puntuar la calidad del evento que sigues.
+
+Las tecnologias utilizadas son JavaScript y React para la aplicacion web, estilada con Boostrap v5.1.3 con la finalidad de hacer sensillo el diseño, En la api se utiliza Java con SpringBoot siguiendo una arquitectura cliente-servidor orientada a futuro implementar microservicios.
+
+# Components
+
+El sistema esta compuesto de los siguientes componentes:
+
+## Api
+## Firestore Database
+# C4-model
+## System Diagram
+## Container Diagram
+## Component Diagram
+# Deployment
