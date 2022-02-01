@@ -1,8 +1,9 @@
 package co.unicauca.domain.service;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import com.google.firebase.auth.FirebaseAuthException;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import co.unicauca.access.dao.IEventRequestDao;
 import co.unicauca.domain.model.Event;
 import co.unicauca.domain.model.TokenInfo;
+import co.unicauca.presentation.rest.exception.EnumErrorCode;
 import co.unicauca.presentation.rest.exception.EventErrorDomainException;
 import co.unicauca.presentation.rest.exception.EventRequestError;
 import co.unicauca.presentation.rest.exception.ResourceNotFoundException;
@@ -68,9 +70,23 @@ public class EventrequestImplService implements IEventRequestService {
     return null;
   }
 
-  private List<EventRequestError> validateEventRequest(final Event eventRequest) {
+  private List<EventRequestError> validateEventRequest(final Event event) {
     List<EventRequestError> errors = new ArrayList<>();
-    // Date currentDate = new Date();
+    Map<String, Object> docData = new HashMap<>();
+
+    docData.put("description", event.getDescription());
+    docData.put("end", event.getEnd());
+    docData.put("location", event.getLocation());
+    docData.put("start", event.getStart());
+    docData.put("type", event.getType());
+    docData.put("name", event.getName());
+    docData.put("imageUrl", event.getImageUrl());
+
+    for (Map.Entry<String, Object> entry : docData.entrySet()) {
+      if (entry.getValue().equals(""))
+        errors.add(new EventRequestError(EnumErrorCode.EMPTY_FIELD, entry.getKey(), "Field empty"));
+    }
+
     return errors;
   }
 }
