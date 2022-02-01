@@ -1,6 +1,9 @@
 package co.unicauca.presentation.rest;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+
+import com.google.firebase.auth.FirebaseAuthException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -17,6 +20,7 @@ import co.unicauca.domain.model.Event;
 import co.unicauca.domain.service.IEventRequestService;
 import co.unicauca.presentation.rest.exception.EventErrorDomainException;
 import co.unicauca.presentation.rest.exception.ResourceNotFoundException;
+import co.unicauca.presentation.rest.exception.TokenErrorInvalid;
 
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,10 +36,12 @@ public class EventRequestController {
    * Obtiene todos los eventos
    * 
    * @return Lista con todos los eventos
+   * @throws ExecutionException
+   * @throws InterruptedException
    */
   @RequestMapping(method = RequestMethod.GET, produces = "application/json")
   @ResponseBody
-  public HttpEntity<List<Event>> findAll() {
+  public HttpEntity<List<Event>> findAll() throws InterruptedException, ExecutionException {
     List<Event> response = eventRequestService.findAll();
     return new ResponseEntity<List<Event>>(response, HttpStatus.OK);
   }
@@ -45,10 +51,13 @@ public class EventRequestController {
    * 
    * @param id
    * @return Evento
+   * @throws ExecutionException
+   * @throws InterruptedException
    */
   @RequestMapping(value = "{id}", method = RequestMethod.GET, produces = "application/json")
   @ResponseBody
-  public HttpEntity<Event> findById(@PathVariable String id) throws ResourceNotFoundException {
+  public HttpEntity<Event> findById(@PathVariable String id)
+      throws ResourceNotFoundException, InterruptedException, ExecutionException {
     Event response = eventRequestService.findById(id);
     return new ResponseEntity<Event>(response, HttpStatus.OK);
   }
@@ -60,12 +69,14 @@ public class EventRequestController {
    * @param event
    * @return Evento
    * @throws EventErrorDomainException
+   * @throws TokenErrorInvalid
+   * @throws FirebaseAuthException
    */
   @RequestMapping(method = RequestMethod.POST, produces = "application/json")
   @ResponseBody
   public HttpEntity<Event> create(@RequestHeader("Authorization") String token, @RequestBody Event event)
-      throws EventErrorDomainException {
-    Event response = eventRequestService.create(event);
+      throws EventErrorDomainException, TokenErrorInvalid, FirebaseAuthException {
+    Event response = eventRequestService.create(event, token);
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
 }
