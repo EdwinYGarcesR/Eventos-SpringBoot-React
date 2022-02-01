@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import co.unicauca.domain.model.Event;
 import co.unicauca.domain.service.IEventRequestService;
+import co.unicauca.presentation.rest.exception.EventErrorDomainException;
 import co.unicauca.presentation.rest.exception.ResourceNotFoundException;
 
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -58,10 +59,12 @@ public class EventRequestController {
    * @param token
    * @param event
    * @return Evento
+   * @throws EventErrorDomainException
    */
   @RequestMapping(method = RequestMethod.POST, produces = "application/json")
   @ResponseBody
-  public HttpEntity<Event> create(@RequestHeader("Authorization") String token, @RequestBody Event event) {
+  public HttpEntity<Event> create(@RequestHeader("Authorization") String token, @RequestBody Event event)
+      throws EventErrorDomainException {
     Event response = eventRequestService.create(event);
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
