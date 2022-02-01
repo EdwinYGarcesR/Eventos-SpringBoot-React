@@ -12,6 +12,16 @@ El sistema esta compuesto de los siguientes componentes:
 ## Api
 ## Firestore Database
 ## C4-model
+### Palabras abreviadas y/o clave:
+**SPA**: single page application
+**API**: Interfaz de programación de aplicaciones
+**Authentication Auth 2.0**: Servicio de autenticación con cuentas de Google
+**Firebase**: Servicio de base de datos no relacionad de Google
+**JSON**: Formato de intercambio de información
+**HTTP**: Protocolo de transferencia
+### Contexto del sistema:
+### Diagrama de contenedores:
+### Diagrama de componentes: 
 ## System Diagram
 ## Container Diagram
 ## Component Diagram
