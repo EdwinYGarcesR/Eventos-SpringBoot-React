@@ -1,10 +1,10 @@
-package co.unicauca.domain.service;
+package co.unicauca.events.domain.service;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
 
-import co.unicauca.domain.model.TokenInfo;
+import co.unicauca.events.domain.model.TokenInfo;
 
 public class VerifyToken {
   public static TokenInfo verifyToken(String token) throws FirebaseAuthException {

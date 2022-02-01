@@ -1,4 +1,4 @@
-package co.unicauca.presentation.rest;
+package co.unicauca.events.presentation.rest;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -16,17 +16,17 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.unicauca.domain.model.Event;
-import co.unicauca.domain.service.IEventRequestService;
-import co.unicauca.presentation.rest.exception.EventErrorDomainException;
-import co.unicauca.presentation.rest.exception.ResourceNotFoundException;
-import co.unicauca.presentation.rest.exception.TokenErrorInvalid;
+import co.unicauca.events.domain.model.Event;
+import co.unicauca.events.domain.service.IEventRequestService;
+import co.unicauca.events.presentation.rest.exception.EventErrorDomainException;
+import co.unicauca.events.presentation.rest.exception.ResourceNotFoundException;
+import co.unicauca.events.presentation.rest.exception.TokenErrorInvalid;
 
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @RestController
-@RequestMapping("eventRequest")
+@RequestMapping("/eventRequest")
 @CrossOrigin(origins = { "http://localhost:3000" })
 public class EventRequestController {
   @Autowired

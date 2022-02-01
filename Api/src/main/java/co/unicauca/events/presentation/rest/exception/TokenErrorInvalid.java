@@ -1,4 +1,4 @@
-package co.unicauca.presentation.rest.exception;
+package co.unicauca.events.presentation.rest.exception;
 
 public class TokenErrorInvalid extends Exception {
   public String token;

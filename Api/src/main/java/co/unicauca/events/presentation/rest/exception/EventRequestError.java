@@ -1,4 +1,4 @@
-package co.unicauca.presentation.rest.exception;
+package co.unicauca.events.presentation.rest.exception;
 
 public class EventRequestError {
   public EnumErrorCode code;

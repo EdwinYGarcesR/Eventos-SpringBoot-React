@@ -1,14 +1,14 @@
-package co.unicauca.domain.service;
+package co.unicauca.events.domain.service;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import com.google.firebase.auth.FirebaseAuthException;
 
-import co.unicauca.domain.model.Event;
-import co.unicauca.presentation.rest.exception.EventErrorDomainException;
-import co.unicauca.presentation.rest.exception.ResourceNotFoundException;
-import co.unicauca.presentation.rest.exception.TokenErrorInvalid;
+import co.unicauca.events.domain.model.Event;
+import co.unicauca.events.presentation.rest.exception.EventErrorDomainException;
+import co.unicauca.events.presentation.rest.exception.ResourceNotFoundException;
+import co.unicauca.events.presentation.rest.exception.TokenErrorInvalid;
 
 /**
  * Interfaz de implementacion de metodos de CRUD para la clase Event

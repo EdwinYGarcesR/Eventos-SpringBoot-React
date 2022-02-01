@@ -1,4 +1,4 @@
-package co.unicauca.access.dao;
+package co.unicauca.events.access.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,9 +16,9 @@ import com.google.firebase.cloud.FirestoreClient;
 
 import org.springframework.stereotype.Service;
 
-import co.unicauca.domain.model.Event;
-import co.unicauca.domain.model.TokenInfo;
-import co.unicauca.domain.model.User;
+import co.unicauca.events.domain.model.Event;
+import co.unicauca.events.domain.model.TokenInfo;
+import co.unicauca.events.domain.model.User;
 
 @Service
 public class EventRequestDaoImpl implements IEventRequestDao {

@@ -1,4 +1,4 @@
-package co.unicauca.domain.service;
+package co.unicauca.events.domain.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,14 +11,14 @@ import com.google.firebase.auth.FirebaseAuthException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import co.unicauca.access.dao.IEventRequestDao;
-import co.unicauca.domain.model.Event;
-import co.unicauca.domain.model.TokenInfo;
-import co.unicauca.presentation.rest.exception.EnumErrorCode;
-import co.unicauca.presentation.rest.exception.EventErrorDomainException;
-import co.unicauca.presentation.rest.exception.EventRequestError;
-import co.unicauca.presentation.rest.exception.ResourceNotFoundException;
-import co.unicauca.presentation.rest.exception.TokenErrorInvalid;
+import co.unicauca.events.access.dao.IEventRequestDao;
+import co.unicauca.events.domain.model.Event;
+import co.unicauca.events.domain.model.TokenInfo;
+import co.unicauca.events.presentation.rest.exception.EnumErrorCode;
+import co.unicauca.events.presentation.rest.exception.EventErrorDomainException;
+import co.unicauca.events.presentation.rest.exception.EventRequestError;
+import co.unicauca.events.presentation.rest.exception.ResourceNotFoundException;
+import co.unicauca.events.presentation.rest.exception.TokenErrorInvalid;
 
 @Service
 public class EventrequestImplService implements IEventRequestService {

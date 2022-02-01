@@ -1,10 +1,10 @@
-package co.unicauca.access.dao;
+package co.unicauca.events.access.dao;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import co.unicauca.domain.model.Event;
-import co.unicauca.domain.model.TokenInfo;
+import co.unicauca.events.domain.model.Event;
+import co.unicauca.events.domain.model.TokenInfo;
 
 public interface IEventRequestDao {
 

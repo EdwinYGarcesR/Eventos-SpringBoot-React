@@ -1,40 +1,16 @@
-package co.unicauca.domain.model;
+package co.unicauca.events.domain.model;
 
-public class TokenInfo {
-  private boolean enabled;
-  private boolean validated;
+public class User {
   private String email;
   private String name;
   private String photoUrl;
   private String uid;
 
-  public TokenInfo(boolean enabled, boolean validated, String email, String name, String photoUrl, String uid) {
-    this.enabled = enabled;
-    this.validated = validated;
+  public User(String email, String name, String photoUrl, String uid) {
     this.email = email;
     this.name = name;
     this.photoUrl = photoUrl;
     this.uid = uid;
-  }
-
-  public TokenInfo() {
-
-  }
-
-  public boolean isEnabled() {
-    return this.enabled;
-  }
-
-  public void setEnabled(boolean enabled) {
-    this.enabled = enabled;
-  }
-
-  public boolean isValidated() {
-    return this.validated;
-  }
-
-  public void setValidated(boolean validated) {
-    this.validated = validated;
   }
 
   public String getEmail() {

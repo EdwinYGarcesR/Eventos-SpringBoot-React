@@ -1,4 +1,4 @@
-package co.unicauca.domain.model;
+package co.unicauca.events.domain.model;
 
 public class Comment {
   private String text;
