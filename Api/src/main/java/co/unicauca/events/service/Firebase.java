@@ -20,7 +20,11 @@ public class Firebase {
       FirebaseOptions options = new FirebaseOptions.Builder()
           .setCredentials(credentials)
           .build();
-      FirebaseApp.initializeApp(options);
+
+      if (FirebaseApp.getApps().size() == 0)
+        FirebaseApp.initializeApp(options);
+      FirebaseApp.getInstance();
+
     } catch (IOException e) {
       e.printStackTrace();
     }
