@@ -16,7 +16,6 @@ import com.google.firebase.cloud.FirestoreClient;
 
 import org.springframework.stereotype.Service;
 
-import ch.qos.logback.core.subst.Token;
 import co.unicauca.domain.model.Event;
 import co.unicauca.domain.model.TokenInfo;
 import co.unicauca.domain.model.User;
@@ -78,19 +77,13 @@ public class EventRequestDaoImpl implements IEventRequestDao {
     docData.put("type", event.getType());
     docData.put("name", event.getName());
     docData.put("imageUrl", event.getImageUrl());
-
-    for (Map.Entry<String, Object> entry : docData.entrySet()) {
-      if (entry.getValue().equals(""))
-        return null;
-    }
+    docData.put("score", 0);
 
     User owner = event.getOwner();
     owner.setUid(uid);
     owner.setName(name);
     owner.setPhotoUrl(photoUrl);
-
     docData.put("owner", owner);
-    docData.put("score", 0);
 
     db.collection("events").add(docData);
 
