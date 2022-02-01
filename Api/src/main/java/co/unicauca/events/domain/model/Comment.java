@@ -8,15 +8,6 @@ public class Comment {
   private String name;
   private String uid;
 
-  public Comment(String text, String id, String photoUrl, String date, String name, String uid) {
-    this.text = text;
-    this.id = id;
-    this.photoUrl = photoUrl;
-    this.date = date;
-    this.name = name;
-    this.uid = uid;
-  }
-
   public String getText() {
     return this.text;
   }

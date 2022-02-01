@@ -8,19 +8,6 @@ public class TokenInfo {
   private String photoUrl;
   private String uid;
 
-  public TokenInfo(boolean enabled, boolean validated, String email, String name, String photoUrl, String uid) {
-    this.enabled = enabled;
-    this.validated = validated;
-    this.email = email;
-    this.name = name;
-    this.photoUrl = photoUrl;
-    this.uid = uid;
-  }
-
-  public TokenInfo() {
-
-  }
-
   public boolean isEnabled() {
     return this.enabled;
   }

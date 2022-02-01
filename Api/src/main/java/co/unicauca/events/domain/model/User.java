@@ -6,13 +6,6 @@ public class User {
   private String photoUrl;
   private String uid;
 
-  public User(String email, String name, String photoUrl, String uid) {
-    this.email = email;
-    this.name = name;
-    this.photoUrl = photoUrl;
-    this.uid = uid;
-  }
-
   public String getEmail() {
     return this.email;
   }

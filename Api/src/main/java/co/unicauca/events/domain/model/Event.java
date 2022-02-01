@@ -12,20 +12,6 @@ public class Event {
   private String type;
   private User owner;
 
-  public Event(Double score, String description, String end, String id, String imageUrl, String location, String name,
-      String start, String type, User owner) {
-    this.score = score;
-    this.description = description;
-    this.end = end;
-    this.id = id;
-    this.imageUrl = imageUrl;
-    this.location = location;
-    this.name = name;
-    this.start = start;
-    this.type = type;
-    this.owner = owner;
-  }
-
   public Double getScore() {
     return this.score;
   }
