@@ -3,15 +3,20 @@ package co.unicauca.domain.service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+
+import com.google.firebase.auth.FirebaseAuthException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import co.unicauca.access.dao.IEventRequestDao;
 import co.unicauca.domain.model.Event;
+import co.unicauca.domain.model.TokenInfo;
 import co.unicauca.presentation.rest.exception.EventErrorDomainException;
 import co.unicauca.presentation.rest.exception.EventRequestError;
 import co.unicauca.presentation.rest.exception.ResourceNotFoundException;
+import co.unicauca.presentation.rest.exception.TokenErrorInvalid;
 
 @Service
 public class EventrequestImplService implements IEventRequestService {
@@ -20,13 +25,19 @@ public class EventrequestImplService implements IEventRequestService {
   private IEventRequestDao eventRequestDao;
 
   @Override
-  public Event create(Event eventRequest) throws EventErrorDomainException {
+  public Event create(Event eventRequest, String token)
+      throws EventErrorDomainException, TokenErrorInvalid, FirebaseAuthException {
     List<EventRequestError> errors = validateEventRequest(eventRequest);
+
+    TokenInfo dataUserCheck = VerifyToken.verifyToken(token);
+
+    if (dataUserCheck == null)
+      throw new TokenErrorInvalid(token);
 
     if (!errors.isEmpty())
       throw new EventErrorDomainException(errors);
 
-    Event eventRequestSave = eventRequestDao.save(eventRequest);
+    Event eventRequestSave = eventRequestDao.save(eventRequest, dataUserCheck);
     if (eventRequestSave != null) {
     }
 
@@ -34,7 +45,7 @@ public class EventrequestImplService implements IEventRequestService {
   }
 
   @Override
-  public Event findById(String id) throws ResourceNotFoundException {
+  public Event findById(String id) throws ResourceNotFoundException, InterruptedException, ExecutionException {
     Event eventRequest = eventRequestDao.findById(id);
     if (eventRequest == null)
       throw new ResourceNotFoundException(id);
@@ -43,7 +54,7 @@ public class EventrequestImplService implements IEventRequestService {
   }
 
   @Override
-  public List<Event> findAll() {
+  public List<Event> findAll() throws InterruptedException, ExecutionException {
     return (List<Event>) eventRequestDao.findAll();
   }
 
