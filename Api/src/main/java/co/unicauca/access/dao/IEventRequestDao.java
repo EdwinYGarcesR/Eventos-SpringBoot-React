@@ -11,5 +11,4 @@ public interface IEventRequestDao {
   public Event findById(String id);
 
   public Event save(Event eventRequest);
-
 }

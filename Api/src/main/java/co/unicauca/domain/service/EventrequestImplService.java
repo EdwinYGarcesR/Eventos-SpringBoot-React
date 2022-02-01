@@ -59,7 +59,7 @@ public class EventrequestImplService implements IEventRequestService {
 
   private List<EventRequestError> validateEventRequest(final Event eventRequest) {
     List<EventRequestError> errors = new ArrayList<>();
-    Date currentDate = new Date();
+    // Date currentDate = new Date();
     return errors;
   }
 }
