@@ -3,6 +3,7 @@ package co.unicauca.domain.service;
 import java.util.List;
 
 import co.unicauca.domain.model.Event;
+import co.unicauca.presentation.rest.exception.EventErrorDomainException;
 import co.unicauca.presentation.rest.exception.ResourceNotFoundException;
 
 /**
@@ -15,7 +16,7 @@ public interface IEventRequestService {
    * @param eventRequest Event
    * @return Event creado
    */
-  public Event create(Event eventRequest);
+  public Event create(Event eventRequest) throws EventErrorDomainException;
 
   /**
    * Encontrar un evento por su id
