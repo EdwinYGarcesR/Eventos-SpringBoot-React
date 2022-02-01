@@ -1,6 +1,7 @@
 package co.unicauca.domain.service;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import co.unicauca.domain.model.Event;
 import co.unicauca.presentation.rest.exception.EventErrorDomainException;
@@ -30,8 +31,10 @@ public interface IEventRequestService {
    * Listar los eventos disponibles
    * 
    * @return List<Event> Event disponibles
+   * @throws ExecutionException
+   * @throws InterruptedException
    */
-  public List<Event> findAll();
+  public List<Event> findAll() throws InterruptedException, ExecutionException;
 
   /**
    * Actualizar un evento
