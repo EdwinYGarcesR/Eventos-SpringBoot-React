@@ -19,6 +19,8 @@ export default function CreateEventPage() {
   const { loggedInUser } = useStore()
   const history = useHistory()
 
+  console.log(loggedInUser.accessToken)
+
   const gapi = window.gapi
   const CLIENT_ID = process.env.REACT_APP_CLIENT_ID
   const API_KEY = process.env.REACT_APP_API_KEY
@@ -71,19 +73,12 @@ export default function CreateEventPage() {
                 end: endDate,
                 location,
                 start: startDate,
-                summary,
+                name: summary,
                 url,
                 imageUrl:
-                  'http://www.radiosuperpopayan.com/wp-content/uploads/2017/03/unicauca.jpg',
+                  'https://www.unicauca.edu.co/gico/themes/dptogrupo/resources/img/blue.png',
                 eventType: 'academico',
-                comments: [],
-                attendees: [],
-                creator: {
-                  displayName: loggedInUser.displayName,
-                  email: loggedInUser.email,
-                  imageUrl: loggedInUser.photoURL,
-                },
-                assessment: 0,
+                type: 'academico',
               }
 
               postData('eventRequest', eventDTO, loggedInUser.accessToken)
@@ -99,12 +94,37 @@ export default function CreateEventPage() {
     })
   }
 
+  const obSubmit2 = event => {
+    event.preventDefault()
+    const eventDTO = {
+      description,
+      end: endDate,
+      location,
+      start: startDate,
+      name: summary,
+      url,
+      imageUrl:
+        'https://www.unicauca.edu.co/gico/themes/dptogrupo/resources/img/blue.png',
+      eventType: 'academico',
+      type: 'academico',
+    }
+
+    postData('eventRequest', eventDTO, loggedInUser.accessToken)
+      .then(() => {
+        setApi(true)
+        setTimeout(() => {
+          history.push('/home')
+        }, 2000)
+      })
+      .catch(() => setApi(false))
+  }
+
   return (
     <div className='vh-100'>
       <div className='d-flex justify-content-center p-5'>
         <h3>Crear un evento</h3>
       </div>
-      <Form onSubmit={onSubmit}>
+      <Form onSubmit={obSubmit2}>
         <Form.Group className='mb-3'>
           <Form.Label>Nombre del evento</Form.Label>
           <Form.Control

@@ -21,6 +21,7 @@ export default function EventPage() {
   const { loggedInUser } = useStore()
   const [comment, setComment] = useState('')
   const [comments, setComments] = useState([])
+  const id = history.pathname.substring(7)
 
   useEffect(() => {
     window.scroll(0, 0)
@@ -42,7 +43,7 @@ export default function EventPage() {
     }
 
     postData(`commentRequest/${id}`, commentDTO, loggedInUser.accessToken)
-      .then(() => {
+      .then(comment => {
         setComment('')
         getData(`commentRequest/${id}`)
           .then(setComments)
