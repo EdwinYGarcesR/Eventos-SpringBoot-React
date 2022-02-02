@@ -30,13 +30,25 @@ export default function NavBar() {
                 navbarScroll
               >
                 <Nav.Item className='link'>
-                  <Link to='/home' className='text-decoration-none text-muted'>Inicio</Link>
+                  <Link to='/home' className='text-decoration-none text-muted'>
+                    Inicio
+                  </Link>
                 </Nav.Item>
                 <Nav.Item className='link'>
-                  <Link to='/create' className='text-decoration-none text-muted'>Crear Evento</Link>
+                  <Link
+                    to='/create'
+                    className='text-decoration-none text-muted'
+                  >
+                    Crear Evento
+                  </Link>
                 </Nav.Item>
                 <Nav.Item className='link'>
-                  <Link to='/create' className='text-decoration-none text-muted'>Calendario</Link>
+                  <Link
+                    to='/create'
+                    className='text-decoration-none text-muted'
+                  >
+                    Calendario
+                  </Link>
                 </Nav.Item>
                 <NavDropdown title='Opciones' id='navbarScrollingDropdown'>
                   <NavDropdown.Item className='d-flex justify-content-center'>

@@ -7,6 +7,7 @@ import java.util.concurrent.ExecutionException;
 import com.google.firebase.auth.FirebaseAuthException;
 
 import co.unicauca.events.domain.model.Event;
+import co.unicauca.events.domain.model.User;
 import co.unicauca.events.presentation.rest.exception.EventErrorDomainException;
 import co.unicauca.events.presentation.rest.exception.ResourceNotFoundException;
 import co.unicauca.events.presentation.rest.exception.TokenErrorInvalid;
@@ -57,4 +58,6 @@ public interface IEventRequestService {
    * @return Event eliminado
    */
   public Event delete();
+
+  public User addMember(String token, String id) throws FirebaseAuthException, InterruptedException, ExecutionException;
 }

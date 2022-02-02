@@ -7,6 +7,7 @@ import {
   FloatingLabel,
   Form,
   ListGroup,
+  Modal,
   Row,
   Spinner,
 } from 'react-bootstrap'
@@ -21,6 +22,9 @@ export default function EventPage() {
   const { loggedInUser } = useStore()
   const [comment, setComment] = useState('')
   const [comments, setComments] = useState([])
+  const id = history.pathname.substring(7)
+  const [modalShow, setModalShow] = useState(false)
+  const [members, setMembers] = useState([])
 
   useEffect(() => {
     window.scroll(0, 0)
@@ -42,7 +46,7 @@ export default function EventPage() {
     }
 
     postData(`commentRequest/${id}`, commentDTO, loggedInUser.accessToken)
-      .then(() => {
+      .then(comment => {
         setComment('')
         getData(`commentRequest/${id}`)
           .then(setComments)
@@ -50,6 +54,18 @@ export default function EventPage() {
       })
       .catch(() => console.log('error'))
   }
+
+  const handleAddMember = () => {
+    postData(`eventRequest/add/${id}`, null, loggedInUser.accessToken)
+      .then(() => {
+        getData(`eventRequest/${id}`)
+          .then(setEvent)
+          .catch(() => setApi(true))
+      })
+      .catch(() => console.log('error'))
+  }
+
+  const handleMembersView = () => {}
 
   return (
     <div>
@@ -90,6 +106,43 @@ export default function EventPage() {
                       Fecha de finalizacion:{' '}
                       {event.end.substring(0, 10).replaceAll('-', '/')}
                     </p>
+                    <div>
+                      <Button
+                        variant='success'
+                        onClick={handleAddMember}
+                        className='m-2'
+                      >
+                        Unirme
+                      </Button>
+                      <Button
+                        variant='success'
+                        onClick={() => setModalShow(true)}
+                      >
+                        Miembros
+                      </Button>
+                      <MyVerticallyCenteredModal
+                        show={modalShow}
+                        onHide={() => setModalShow(false)}
+                      >
+                        {event.members?.map(c => (
+                          <>
+                            <ListGroup.Item className='d-flex align-items-center'>
+                              <img
+                                src={c.photoUrl}
+                                alt='Avatar'
+                                className='bg-info rounded-circle'
+                                style={{ width: '40px', heigth: '40px' }}
+                              />
+                              <p className='p-2 text-break m-0'>
+                                <span className='fw-bold'>{c.name} </span>
+                                <span>{c.email}</span>
+                                {c.text}
+                              </p>
+                            </ListGroup.Item>
+                          </>
+                        ))}
+                      </MyVerticallyCenteredModal>
+                    </div>
                   </Col>
                   <Container>
                     <br />
@@ -151,5 +204,26 @@ export default function EventPage() {
         </>
       )}
     </div>
+  )
+}
+
+function MyVerticallyCenteredModal(props) {
+  return (
+    <Modal
+      {...props}
+      size='lg'
+      aria-labelledby='contained-modal-title-vcenter'
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id='contained-modal-title-vcenter'>
+          Miembros
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>{props.children}</Modal.Body>
+      <Modal.Footer>
+        <Button onClick={props.onHide}>Close</Button>
+      </Modal.Footer>
+    </Modal>
   )
 }

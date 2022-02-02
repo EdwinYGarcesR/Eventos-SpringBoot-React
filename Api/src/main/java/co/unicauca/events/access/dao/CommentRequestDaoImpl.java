@@ -1,6 +1,8 @@
 package co.unicauca.events.access.dao;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +10,8 @@ import java.util.concurrent.ExecutionException;
 
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.CollectionReference;
+import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
@@ -47,15 +51,9 @@ public class CommentRequestDaoImpl implements ICommentRequestDao {
     docData.put("name", name);
     docData.put("photoUrl", photoUrl);
     docData.put("uid", uid);
+    docData.put("id", id);
 
-    Iterable<CollectionReference> collections = db.collection("events").document(id).listCollections();
-
-    for (CollectionReference collRef : collections) {
-
-      if (collRef.getId().equals("comments")) {
-        collRef.add(docData);
-      }
-    }
+    db.collection("comments").add(docData);
 
     docData.replace("uid", null);
 
@@ -66,21 +64,14 @@ public class CommentRequestDaoImpl implements ICommentRequestDao {
   public List<Comment> findAllById(String id) throws InterruptedException, ExecutionException {
     List<Comment> comments = new ArrayList<>();
 
-    Iterable<CollectionReference> collections = db.collection("events").document(id).listCollections();
+    ApiFuture<QuerySnapshot> future = db.collection("comments").get();
+    List<QueryDocumentSnapshot> documents = future.get().getDocuments();
 
-    for (CollectionReference collRef : collections) {
-
-      if (collRef.getId().equals("comments")) {
-        ApiFuture<QuerySnapshot> future = collRef.orderBy("date", Direction.DESCENDING).get();
-        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
-
-        for (QueryDocumentSnapshot document : documents) {
-          Comment comment = document.toObject(Comment.class);
-          comment.setId(document.getId());
-          comment.setUid(null);
-          comments.add(comment);
-        }
-      }
+    for (DocumentSnapshot document : documents) {
+      Comment comment = document.toObject(Comment.class);
+      comment.setId(document.getId());
+      comment.setUid(null);
+      comments.add(comment);
     }
 
     return comments;

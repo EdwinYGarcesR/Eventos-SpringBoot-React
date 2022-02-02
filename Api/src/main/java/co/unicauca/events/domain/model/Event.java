@@ -1,5 +1,7 @@
 package co.unicauca.events.domain.model;
 
+import java.util.List;
+
 public class Event {
   private Double score; // Valoracion
   private String description;
@@ -11,6 +13,15 @@ public class Event {
   private String start; // Fecha de inicio
   private String type;
   private User owner;
+  private List<User> members;
+
+  public List<User> getMembers() {
+    return this.members;
+  }
+
+  public void setMembers(List<User> members) {
+    this.members = members;
+  }
 
   public Double getScore() {
     return this.score;

@@ -6,6 +6,7 @@ import java.util.concurrent.ExecutionException;
 
 import co.unicauca.events.domain.model.Event;
 import co.unicauca.events.domain.model.TokenInfo;
+import co.unicauca.events.domain.model.User;
 
 public interface IEventRequestDao {
 
@@ -14,4 +15,6 @@ public interface IEventRequestDao {
   public Event findById(String id) throws InterruptedException, ExecutionException;
 
   public Map<String, Object> save(Event eventRequest, TokenInfo dataUserCheck);
+
+  public User addMember(TokenInfo dataUserCheck, String id) throws InterruptedException, ExecutionException;
 }

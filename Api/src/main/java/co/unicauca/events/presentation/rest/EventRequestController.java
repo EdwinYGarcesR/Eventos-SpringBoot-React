@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.unicauca.events.domain.model.Event;
+import co.unicauca.events.domain.model.User;
 import co.unicauca.events.domain.service.IEventRequestService;
 import co.unicauca.events.presentation.rest.exception.EventErrorDomainException;
 import co.unicauca.events.presentation.rest.exception.ResourceNotFoundException;
@@ -79,5 +80,13 @@ public class EventRequestController {
       throws EventErrorDomainException, TokenErrorInvalid, FirebaseAuthException {
     Map<String, Object> response = eventRequestService.create(event, token);
     return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+  }
+
+  @RequestMapping(value = "add/{id}", method = RequestMethod.POST, produces = "application/json")
+  @ResponseBody
+  public HttpEntity<User> addMember(@RequestHeader("Authorization") String token, @PathVariable String id)
+      throws FirebaseAuthException, InterruptedException, ExecutionException {
+    User response = eventRequestService.addMember(token, id);
+    return new ResponseEntity<User>(response, HttpStatus.OK);
   }
 }
