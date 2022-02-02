@@ -19,7 +19,7 @@ El sistema esta compuesto de los siguientes componentes:
 
 -**Authentication Auth 2.0**: Servicio de autenticación con cuentas de Google
 
--**Firebase**: Servicio de base de datos no relacionad de Google
+-**Firestore**: Servicio de base de datos no relacionad de Google
 
 -**JSON**: Formato de intercambio de información
 
