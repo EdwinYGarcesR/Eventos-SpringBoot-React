@@ -79,7 +79,7 @@ public class EventRequestDaoImpl implements IEventRequestDao {
     docData.put("imageUrl", event.getImageUrl());
     docData.put("score", 0);
 
-    User owner = event.getOwner();
+    User owner = new User();
     owner.setUid(uid);
     owner.setName(name);
     owner.setPhotoUrl(photoUrl);
