@@ -27,7 +27,7 @@ public class EventrequestImplService implements IEventRequestService {
   private IEventRequestDao eventRequestDao;
 
   @Override
-  public Event create(Event eventRequest, String token)
+  public Map<String, Object> create(Event eventRequest, String token)
       throws EventErrorDomainException, TokenErrorInvalid, FirebaseAuthException {
     List<EventRequestError> errors = validateEventRequest(eventRequest);
 
@@ -39,7 +39,7 @@ public class EventrequestImplService implements IEventRequestService {
     if (!errors.isEmpty())
       throw new EventErrorDomainException(errors);
 
-    Event eventRequestSave = eventRequestDao.save(eventRequest, dataUserCheck);
+    Map<String, Object> eventRequestSave = eventRequestDao.save(eventRequest, dataUserCheck);
     if (eventRequestSave != null) {
     }
 
