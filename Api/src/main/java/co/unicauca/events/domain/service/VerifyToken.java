@@ -8,6 +8,7 @@ import co.unicauca.events.domain.model.TokenInfo;
 
 public class VerifyToken {
   public static TokenInfo verifyToken(String token) throws FirebaseAuthException {
+
     FirebaseToken decodedToken = FirebaseAuth.getInstance().verifyIdToken(token);
     TokenInfo tokenInfo = new TokenInfo();
 

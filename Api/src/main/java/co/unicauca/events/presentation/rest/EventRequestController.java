@@ -1,6 +1,7 @@
 package co.unicauca.events.presentation.rest;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import com.google.firebase.auth.FirebaseAuthException;
@@ -26,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @RestController
-@RequestMapping("/eventRequest")
+@RequestMapping("eventRequest")
 @CrossOrigin(origins = { "http://localhost:3000" })
 public class EventRequestController {
   @Autowired
@@ -74,9 +75,9 @@ public class EventRequestController {
    */
   @RequestMapping(method = RequestMethod.POST, produces = "application/json")
   @ResponseBody
-  public HttpEntity<Event> create(@RequestHeader("Authorization") String token, @RequestBody Event event)
+  public HttpEntity<Map<String, Object>> create(@RequestHeader("Authorization") String token, @RequestBody Event event)
       throws EventErrorDomainException, TokenErrorInvalid, FirebaseAuthException {
-    Event response = eventRequestService.create(event, token);
-    return new ResponseEntity<>(response, HttpStatus.OK);
+    Map<String, Object> response = eventRequestService.create(event, token);
+    return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
   }
 }
