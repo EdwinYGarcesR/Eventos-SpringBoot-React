@@ -13,16 +13,22 @@ El sistema esta compuesto de los siguientes componentes:
 ## Firestore Database
 ## C4-model
 ### Palabras abreviadas y/o clave:
-**SPA**: single page application
-**API**: Interfaz de programación de aplicaciones
-**Authentication Auth 2.0**: Servicio de autenticación con cuentas de Google
-**Firebase**: Servicio de base de datos no relacionad de Google
-**JSON**: Formato de intercambio de información
-**HTTP**: Protocolo de transferencia
-### Contexto del sistema:
+-**SPA**: single page application
+
+-**API**: Interfaz de programación de aplicaciones
+
+-**Authentication Auth 2.0**: Servicio de autenticación con cuentas de Google
+
+-**Firebase**: Servicio de base de datos no relacionad de Google
+
+-**JSON**: Formato de intercambio de información
+
+-**HTTP**: Protocolo de transferencia
+
+### Diagrama de Contexto del sistema:
+![c4-Contexto de sistema](https://github.com/climacot/Eventos-SpringBoot-React/blob/main/models/C4/c4-Contexto%20de%20sistema.png?raw=true)
 ### Diagrama de contenedores:
-### Diagrama de componentes: 
-## System Diagram
-## Container Diagram
-## Component Diagram
+![c4-Containers](https://github.com/climacot/Eventos-SpringBoot-React/blob/main/models/C4/c4-Containers.png?raw=true)
+### Diagrama de componentes:
+![c4-Components](https://github.com/climacot/Eventos-SpringBoot-React/blob/main/models/C4/c4-Components.png?raw=true)
 ## Deployment
