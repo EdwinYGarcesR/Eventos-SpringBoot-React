@@ -1,6 +1,7 @@
 package co.unicauca.events.domain.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import com.google.firebase.auth.FirebaseAuthException;
@@ -22,7 +23,7 @@ public interface IEventRequestService {
    * @throws TokenErrorInvalid
    * @throws FirebaseAuthException
    */
-  public Event create(Event eventRequest, String token) throws EventErrorDomainException, TokenErrorInvalid, FirebaseAuthException;
+  public Map<String, Object> create(Event eventRequest, String token) throws EventErrorDomainException, TokenErrorInvalid, FirebaseAuthException;
 
   /**
    * Encontrar un evento por su id
