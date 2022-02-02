@@ -9,9 +9,11 @@ import java.util.concurrent.ExecutionException;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
+import com.google.cloud.firestore.FieldValue;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
+import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.cloud.FirestoreClient;
 
 import org.springframework.stereotype.Service;
@@ -88,5 +90,31 @@ public class EventRequestDaoImpl implements IEventRequestDao {
     db.collection("events").add(docData);
 
     return docData;
+  }
+
+  @Override
+  public User addMember(TokenInfo dataUserCheck, String id) throws InterruptedException, ExecutionException {
+    DocumentReference eventRef = db.collection("events").document(id);
+    Map<String, Object> docData = new HashMap<>();
+
+    String uid = dataUserCheck.getUid();
+    String name = dataUserCheck.getName();
+    String photoUrl = dataUserCheck.getPhotoUrl();
+    String email = dataUserCheck.getEmail();
+    docData.put("uid", uid);
+    docData.put("name", name);
+    docData.put("photoUrl", photoUrl);
+    docData.put("email", email);
+
+    ApiFuture<WriteResult> arrayUnion = eventRef.update("members",
+        FieldValue.arrayUnion(docData));
+
+    User owner = new User();
+    owner.setUid(uid);
+    owner.setName(name);
+    owner.setPhotoUrl(photoUrl);
+    owner.setEmail(email);
+
+    return owner;
   }
 }

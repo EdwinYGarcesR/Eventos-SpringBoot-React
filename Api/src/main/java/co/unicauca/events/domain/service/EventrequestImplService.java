@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import co.unicauca.events.access.dao.IEventRequestDao;
 import co.unicauca.events.domain.model.Event;
 import co.unicauca.events.domain.model.TokenInfo;
+import co.unicauca.events.domain.model.User;
 import co.unicauca.events.presentation.rest.exception.EnumErrorCode;
 import co.unicauca.events.presentation.rest.exception.EventErrorDomainException;
 import co.unicauca.events.presentation.rest.exception.EventRequestError;
@@ -88,5 +89,13 @@ public class EventrequestImplService implements IEventRequestService {
     }
 
     return errors;
+  }
+
+  @Override
+  public User addMember(String token, String id)
+      throws FirebaseAuthException, InterruptedException, ExecutionException {
+    TokenInfo dataUserCheck = VerifyToken.verifyToken(token);
+    User response = eventRequestDao.addMember(dataUserCheck, id);
+    return response;
   }
 }
