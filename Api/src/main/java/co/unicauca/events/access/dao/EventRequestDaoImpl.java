@@ -63,7 +63,7 @@ public class EventRequestDaoImpl implements IEventRequestDao {
   }
 
   @Override
-  public Event save(Event event, TokenInfo dataUserCheck) {
+  public Map<String, Object> save(Event event, TokenInfo dataUserCheck) {
     Map<String, Object> docData = new HashMap<>();
 
     String uid = dataUserCheck.getUid();
@@ -87,6 +87,6 @@ public class EventRequestDaoImpl implements IEventRequestDao {
 
     db.collection("events").add(docData);
 
-    return (Event) docData;
+    return docData;
   }
 }
