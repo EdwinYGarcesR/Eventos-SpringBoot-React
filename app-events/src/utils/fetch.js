@@ -1,10 +1,12 @@
-export async function postData(url = '', data = {}) {
+export async function postData(url = '', data = {}, token = '') {
+
   const fecthApi = urlApi(url)
 
   const response = await fetch(fecthApi, {
     method: 'POST',
     mode: 'cors',
     headers: {
+      'Authorization': token,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),

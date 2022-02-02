@@ -86,7 +86,7 @@ export default function CreateEventPage() {
                 assessment: 0,
               }
 
-              postData('event', eventDTO)
+              postData('eventRequest', eventDTO, loggedInUser.accessToken)
                 .then(() => {
                   setApi(true)
                   setTimeout(() => {

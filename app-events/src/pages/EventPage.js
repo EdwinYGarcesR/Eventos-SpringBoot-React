@@ -20,12 +20,16 @@ export default function EventPage() {
   const [api, setApi] = useState(false)
   const { loggedInUser } = useStore()
   const [comment, setComment] = useState('')
+  const [comments, setComments] = useState([])
 
   useEffect(() => {
     window.scroll(0, 0)
     const id = history.pathname.substring(7)
-    getData(`event/${id}`)
+    getData(`eventRequest/${id}`)
       .then(setEvent)
+      .catch(() => setApi(true))
+    getData(`commentRequest/${id}`)
+      .then(setComments)
       .catch(() => setApi(true))
   }, [history])
 
@@ -33,17 +37,15 @@ export default function EventPage() {
     const id = history.pathname.substring(7)
 
     const commentDTO = {
-      nameOwner: loggedInUser.displayName,
-      photoUrl: loggedInUser.photoURL,
-      idEvent: id,
-      comment,
+      date: new Date(),
+      text: comment,
     }
 
-    postData('event/comment', commentDTO)
+    postData(`commentRequest/${id}`, commentDTO, loggedInUser.accessToken)
       .then(() => {
         setComment('')
-        getData(`event/${id}`)
-          .then(setEvent)
+        getData(`commentRequest/${id}`)
+          .then(setComments)
           .catch(() => setApi(true))
       })
       .catch(() => console.log('error'))
@@ -71,11 +73,13 @@ export default function EventPage() {
                       alt='...'
                       src={event.imageUrl}
                       className='img-fluid rounded float-start'
+                      width='300'
+                      heigth='300'
                     />
                   </Col>
                   <Col xs={12} md={7}>
                     <div>
-                      <h3>{event.summary}</h3>
+                      <h3>{event.name}</h3>
                     </div>
                     <p>{event.description}</p>
                     <p>
@@ -106,12 +110,15 @@ export default function EventPage() {
                           />
                         </FloatingLabel>
                         <div class='d-flex flex-row-reverse bd-highlight'>
-                          <Button onClick={() => handleClick()} variant='success'>
+                          <Button
+                            onClick={() => handleClick()}
+                            variant='success'
+                          >
                             Comentar
                           </Button>
                         </div>
                       </Form>
-                      {event.comments.map(c => (
+                      {comments.map(c => (
                         <>
                           <ListGroup.Item className='d-flex align-items-center'>
                             <img
@@ -121,15 +128,12 @@ export default function EventPage() {
                               style={{ width: '40px', heigth: '40px' }}
                             />
                             <p className='p-2 text-break m-0'>
-                              <span className='fw-bold'>{c.nameOwner}: </span>
-                              {c.comment}
+                              <span className='fw-bold'>{c.name}: </span>
+                              {c.text}
                             </p>
                           </ListGroup.Item>
                         </>
                       ))}
-                      <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-                      <ListGroup.Item>Morbi leo risus</ListGroup.Item>
-                      <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
                     </ListGroup>
                   </Container>
                 </Row>

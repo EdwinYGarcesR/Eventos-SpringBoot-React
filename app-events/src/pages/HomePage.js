@@ -8,7 +8,7 @@ export default function HomePage() {
   const [api, setApi] = useState(false)
 
   useEffect(() => {
-    getData('event')
+    getData('eventRequest')
       .then(setEvents)
       .catch(() => setApi(true))
   }, [])
